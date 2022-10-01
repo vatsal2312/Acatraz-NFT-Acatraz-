@@ -5,7 +5,7 @@ pragma solidity ^0.8.7;
 import './Context.sol';
 import './Ownable.sol';
 import './ReentrancyGuard.sol';
-import './MerkalProof.sol';
+import './MerkleProof.sol';
 import './Strings.sol';
 import './ERC721A.sol';
 import './IERC721A.sol';
