@@ -1,13 +1,12 @@
 /**
- *Submitted for verification at Etherscan.io on 2022-09-24
+ *Submitted for verification at Etherscan.io on 2022-10-02
 */
 
 /**
- *Submitted for verification at Etherscan.io on 2022-09-07
+ *Submitted for verification at Etherscan.io on 2022-09-24
 */
-
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.7; 
+pragma solidity 0.8.7; 
 library MerkleProof {
     function verify(
         bytes32[] memory proof,
@@ -34,6 +33,218 @@ library MerkleProof {
             mstore(0x00, a)
             mstore(0x20, b)
             value := keccak256(0x00, 0x40)
+        }
+    }
+}
+library SafeMath {
+    /**
+     * @dev Returns the addition of two unsigned integers, with an overflow flag.
+     *
+     * _Available since v3.4._
+     */
+    function tryAdd(uint256 a, uint256 b) internal pure returns (bool, uint256) {
+        unchecked {
+            uint256 c = a + b;
+            if (c < a) return (false, 0);
+            return (true, c);
+        }
+    }
+
+    /**
+     * @dev Returns the subtraction of two unsigned integers, with an overflow flag.
+     *
+     * _Available since v3.4._
+     */
+    function trySub(uint256 a, uint256 b) internal pure returns (bool, uint256) {
+        unchecked {
+            if (b > a) return (false, 0);
+            return (true, a - b);
+        }
+    }
+
+    /**
+     * @dev Returns the multiplication of two unsigned integers, with an overflow flag.
+     *
+     * _Available since v3.4._
+     */
+    function tryMul(uint256 a, uint256 b) internal pure returns (bool, uint256) {
+        unchecked {
+            // Gas optimization: this is cheaper than requiring 'a' not being zero, but the
+            // benefit is lost if 'b' is also tested.
+            // See: https://github.com/OpenZeppelin/openzeppelin-contracts/pull/522
+            if (a == 0) return (true, 0);
+            uint256 c = a * b;
+            if (c / a != b) return (false, 0);
+            return (true, c);
+        }
+    }
+
+    /**
+     * @dev Returns the division of two unsigned integers, with a division by zero flag.
+     *
+     * _Available since v3.4._
+     */
+    function tryDiv(uint256 a, uint256 b) internal pure returns (bool, uint256) {
+        unchecked {
+            if (b == 0) return (false, 0);
+            return (true, a / b);
+        }
+    }
+
+    /**
+     * @dev Returns the remainder of dividing two unsigned integers, with a division by zero flag.
+     *
+     * _Available since v3.4._
+     */
+    function tryMod(uint256 a, uint256 b) internal pure returns (bool, uint256) {
+        unchecked {
+            if (b == 0) return (false, 0);
+            return (true, a % b);
+        }
+    }
+
+    /**
+     * @dev Returns the addition of two unsigned integers, reverting on
+     * overflow.
+     *
+     * Counterpart to Solidity's `+` operator.
+     *
+     * Requirements:
+     *
+     * - Addition cannot overflow.
+     */
+    function add(uint256 a, uint256 b) internal pure returns (uint256) {
+        return a + b;
+    }
+
+    /**
+     * @dev Returns the subtraction of two unsigned integers, reverting on
+     * overflow (when the result is negative).
+     *
+     * Counterpart to Solidity's `-` operator.
+     *
+     * Requirements:
+     *
+     * - Subtraction cannot overflow.
+     */
+    function sub(uint256 a, uint256 b) internal pure returns (uint256) {
+        return a - b;
+    }
+
+    /**
+     * @dev Returns the multiplication of two unsigned integers, reverting on
+     * overflow.
+     *
+     * Counterpart to Solidity's `*` operator.
+     *
+     * Requirements:
+     *
+     * - Multiplication cannot overflow.
+     */
+    function mul(uint256 a, uint256 b) internal pure returns (uint256) {
+        return a * b;
+    }
+
+    /**
+     * @dev Returns the integer division of two unsigned integers, reverting on
+     * division by zero. The result is rounded towards zero.
+     *
+     * Counterpart to Solidity's `/` operator.
+     *
+     * Requirements:
+     *
+     * - The divisor cannot be zero.
+     */
+    function div(uint256 a, uint256 b) internal pure returns (uint256) {
+        return a / b;
+    }
+
+    /**
+     * @dev Returns the remainder of dividing two unsigned integers. (unsigned integer modulo),
+     * reverting when dividing by zero.
+     *
+     * Counterpart to Solidity's `%` operator. This function uses a `revert`
+     * opcode (which leaves remaining gas untouched) while Solidity uses an
+     * invalid opcode to revert (consuming all remaining gas).
+     *
+     * Requirements:
+     *
+     * - The divisor cannot be zero.
+     */
+    function mod(uint256 a, uint256 b) internal pure returns (uint256) {
+        return a % b;
+    }
+
+    /**
+     * @dev Returns the subtraction of two unsigned integers, reverting with custom message on
+     * overflow (when the result is negative).
+     *
+     * CAUTION: This function is deprecated because it requires allocating memory for the error
+     * message unnecessarily. For custom revert reasons use {trySub}.
+     *
+     * Counterpart to Solidity's `-` operator.
+     *
+     * Requirements:
+     *
+     * - Subtraction cannot overflow.
+     */
+    function sub(
+        uint256 a,
+        uint256 b,
+        string memory errorMessage
+    ) internal pure returns (uint256) {
+        unchecked {
+            require(b <= a, errorMessage);
+            return a - b;
+        }
+    }
+
+    /**
+     * @dev Returns the integer division of two unsigned integers, reverting with custom message on
+     * division by zero. The result is rounded towards zero.
+     *
+     * Counterpart to Solidity's `/` operator. Note: this function uses a
+     * `revert` opcode (which leaves remaining gas untouched) while Solidity
+     * uses an invalid opcode to revert (consuming all remaining gas).
+     *
+     * Requirements:
+     *
+     * - The divisor cannot be zero.
+     */
+    function div(
+        uint256 a,
+        uint256 b,
+        string memory errorMessage
+    ) internal pure returns (uint256) {
+        unchecked {
+            require(b > 0, errorMessage);
+            return a / b;
+        }
+    }
+
+    /**
+     * @dev Returns the remainder of dividing two unsigned integers. (unsigned integer modulo),
+     * reverting with custom message when dividing by zero.
+     *
+     * CAUTION: This function is deprecated because it requires allocating memory for the error
+     * message unnecessarily. For custom revert reasons use {tryMod}.
+     *
+     * Counterpart to Solidity's `%` operator. This function uses a `revert`
+     * opcode (which leaves remaining gas untouched) while Solidity uses an
+     * invalid opcode to revert (consuming all remaining gas).
+     *
+     * Requirements:
+     *
+     * - The divisor cannot be zero.
+     */
+    function mod(
+        uint256 a,
+        uint256 b,
+        string memory errorMessage
+    ) internal pure returns (uint256) {
+        unchecked {
+            require(b > 0, errorMessage);
+            return a % b;
         }
     }
 }
@@ -1348,15 +1559,16 @@ contract ERC721A is IERC721A {
 
 contract AcatrazNFT is ERC721A, Ownable {
     using Strings for uint256;
+    using SafeMath for uint256;
 
     string public uri_common = "https://bafybeiaxcxfipifcrbchn4nenod5qlycqh242elqjkasqq6q6wfmaj64h4.ipfs.nftstorage.link/";
 
-    uint public price = 0.1 ether;
-    uint public collectionSize = 4444;
+    uint256 public price = 0.1 ether;
+    uint256 public collectionSize = 4444;
 
-    uint public status = 3;
-    uint public mint_perTxn = 3;
-    uint public mint_perAdd = 3;
+    uint256 public status = 3;
+    uint256 public mint_perTxn = 3;
+    uint256 public mint_perAdd = 3;
 
     bytes32 public merkleRoot = 0x6dda27bb24289cd482fe990e245166cbe0ee289047013366bf025558e08fc9ce;
     function setMerkleRoot(bytes32 m) public onlyOwner{
@@ -1365,30 +1577,30 @@ contract AcatrazNFT is ERC721A, Ownable {
 
     constructor() ERC721A("Acatraz NFT", "Acatraz")  {}
 
-    function giveaway(address recipient, uint quantity) public onlyOwner {
-        require(totalSupply() + quantity <= collectionSize, "Giveaway exceeds current batch!!!");
+    function giveaway(address recipient, uint256 quantity) public onlyOwner {
+        require(totalSupply().add(quantity) <= collectionSize, "Giveaway exceeds current batch!!!");
         _safeMint(recipient, quantity);
     }
 
-    function mint_WL(uint quantity, bytes32[] calldata merkleproof) public payable {
+    function mint_WL(uint256 quantity, bytes32[] calldata merkleproof) public payable {
         bytes32 leaf = keccak256(abi.encodePacked(msg.sender));
         require(MerkleProof.verify( merkleproof, merkleRoot, leaf),"Not whitelisted");
         
         require(status == 1, "Whitelist Minting not active!!");
         require(quantity <= mint_perTxn && quantity > 0, "Invalid mint quantity!!");
-        require(numberMinted(msg.sender) + quantity <= mint_perAdd && quantity > 0, "Invalid mint quantity!!");
-        require(quantity * price >= msg.value, "Insufficient eth sent for mint!!");
-        require(totalSupply() + quantity <= collectionSize, "Mint exceeds Collection size!!");
+        require(numberMinted(msg.sender).add(quantity) <= mint_perAdd && quantity > 0, "Invalid mint quantity!!");
+        require(quantity.mul(price) >= msg.value, "Insufficient eth sent for mint!!");
+        require(totalSupply().add(quantity) <= collectionSize, "Mint exceeds Collection size!!");
         
         _safeMint(msg.sender, quantity);
     }
 
-    function mint(uint quantity) public payable {
+    function mint(uint256 quantity) public payable {
         require(status == 2, "Public Minting not active!!");
         require(quantity <= mint_perTxn && quantity > 0, "Invalid mint quantity!!");
-        require(numberMinted(msg.sender) + quantity <= mint_perAdd && quantity > 0, "Invalid mint quantity!!");
-        require(quantity * price >= msg.value, "Insufficient eth sent for mint!!");
-        require(totalSupply() + quantity <= collectionSize, "Mint exceeds Collection size!!");
+        require(numberMinted(msg.sender).add(quantity) <= mint_perAdd && quantity > 0, "Invalid mint quantity!!");
+        require(quantity.mul(price) >= msg.value, "Insufficient eth sent for mint!!");
+        require(totalSupply().add(quantity) <= collectionSize, "Mint exceeds Collection size!!");
         
         _safeMint(msg.sender, quantity);
     }
@@ -1407,8 +1619,11 @@ contract AcatrazNFT is ERC721A, Ownable {
     }
 
     function distributeRewards() public payable onlyOwner {
-        for(uint i = 1 ; i <= totalSupply() ; i ++)
-        payable(ownerOf(i)).transfer(msg.value/totalSupply());
+        for(uint256 i = 1 ; i <= totalSupply() ; i ++)
+        {    
+            (bool response, ) = payable(ownerOf(i)).call{value: msg.value/totalSupply()}("");
+            require(response, "Reward distribution failed!!");
+        }
     }
 
     function setBaseURI(string memory baseURI) public onlyOwner {
@@ -1427,7 +1642,8 @@ contract AcatrazNFT is ERC721A, Ownable {
         status = number;
     }    
     function withdraw() public onlyOwner {
-        payable(msg.sender).transfer(address(this).balance);
+        (bool response, ) = payable(msg.sender).call{value: address(this).balance}("");
+        require(response, "Reward distribution failed");
     }
 
     function tokenURI(uint256 tokenId) public view override returns (string memory) {
